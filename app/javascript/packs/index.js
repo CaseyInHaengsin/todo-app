@@ -4,20 +4,8 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
+import App from '../App'
 
-const App = () => {
-  return (
-    <div class='font-sans bg-white h-screen flex flex-col w-full'>
-      <div class='h-screen bg-gradient-to-r'>
-        <div class='px-4 py-48'>
-          <div class='relative w-full text-center'>
-              hello
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
