@@ -15,8 +15,7 @@ function TodoForm () {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>To Do list</h2>
+    <form onSubmit={handleSubmit} className="py-4">
       <div className='flex-col justify-center'>
         <div className="align-center mb-2 mt-2">
           <input
