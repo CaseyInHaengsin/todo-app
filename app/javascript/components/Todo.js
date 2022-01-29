@@ -16,7 +16,7 @@ function Todo ({ todo }) {
         <button
           className='text-left basis-1'
           onClick={() => {
-            deleteTodo(id)
+            deleteTodo(todo.id)
           }}
         >
           Delete

@@ -12,7 +12,6 @@ function TodoForm () {
     e.preventDefault()
     if (!task) setError('You need a task')
     if (todoEdit.edit === true) {
-      
       updateTodoItem(todoEdit.item.id, {
         task: task,
         description: description
@@ -36,7 +35,7 @@ function TodoForm () {
       <div className='flex-col justify-center'>
         <div className='align-center mb-2 mt-2'>
           <input
-            className='w-1/2'
+            className='w-1/2 input text-color background-color'
             onChange={e => {
               if (error) setError('')
               setTask(e.target.value)
@@ -45,10 +44,10 @@ function TodoForm () {
             value={task}
             placeholder='Add Task'
           />
-        </div>
+        </div>        
         <div className='align-center mb-2 mt-2'>
           <input
-            className='w-1/2'
+            className='w-1/2 input text-color background-color'
             onChange={e => {
               setDescription(e.target.value)
             }}

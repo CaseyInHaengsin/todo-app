@@ -7,10 +7,10 @@ import TodoList from './components/TodoList'
 const App = () => {
   return (
     <TodoProvider>
-      <div className='font-sans bg-white h-1/3 flex flex-col w-full'>
+      <div className='font-sans background-color h-1/3 flex flex-col w-full'>
         <Header />
         <div className='px-4 py-38'>
-          <div className='bg-red-500 h-screen relative w-full text-center'>
+          <div className='background-color h-screen relative w-full text-center'>
             <TodoForm />
             <TodoList />
           </div>

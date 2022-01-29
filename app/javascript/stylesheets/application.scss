@@ -3,11 +3,23 @@
 @import "tailwindcss/utilities";
 
 .btn {
-    @apply px-4 py-2 bg-blue-600 text-white rounded; 
+    @apply px-4 py-2 bg-purple-900 text-white rounded-md;
 }
 
 :root{
   --primary-bright-blue: hsl(220, 98%, 61%);
   --check-background: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
 
+}
+
+.text-color{
+  @apply text-white
+}
+
+.background-color{
+  @apply bg-black
+}
+
+.input{
+  @apply rounded-md border shadow-sm border-slate-300 focus-within:border-collapse
 }

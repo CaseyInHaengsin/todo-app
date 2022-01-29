@@ -33,6 +33,7 @@ export function TodoProvider ({ children }) {
   }
 
   const deleteTodo = id => {
+      console.log('clicked delete')
     setTodos(todos.filter(todo => todo.id !== id))
   }
 
