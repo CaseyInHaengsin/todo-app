@@ -2,24 +2,33 @@ import React, { useState, useContext, useEffect } from 'react'
 import TodoContext from './TodoContext'
 
 function TodoForm () {
-  const { addTodo, todoEdit, updateTodoItem } = useContext(TodoContext)
-  const [editEnabled, setEditEnable] = useState(false)
+  const [editEnabled, setEditEnable] = useState(true)
   const [task, setTask] = useState('')
   const [error, setError] = useState('')
   const [description, setDescription] = useState('')
+  const { addTodo, todoEdit, updateTodoItem } = useContext(TodoContext)
 
   const handleSubmit = e => {
     e.preventDefault()
     if (!task) setError('You need a task')
-    addTodo({ task, description })
-    setDescription('')
+    if (todoEdit.edit === true) {
+      
+      updateTodoItem(todoEdit.item.id, {
+        task: task,
+        description: description
+      })
+    } else {
+      addTodo({ task, description })
+    }
     setTask('')
+    setDescription('')
   }
 
   useEffect(() => {
     if (!todoEdit.edit === true) return
     setEditEnable(false)
-    setTask(todoEdit.item.text)
+    setTask(todoEdit.item.task)
+    setDescription(todoEdit.item.description)
   }, [todoEdit])
 
   return (
@@ -49,7 +58,7 @@ function TodoForm () {
           />
         </div>
         {error && <h5>Error {error}</h5>}
-        <button className='btn w-1/2'>Add</button>
+        <button className='btn w-1/2'>{editEnabled ? 'Add' : 'Update'}</button>
       </div>
     </form>
   )

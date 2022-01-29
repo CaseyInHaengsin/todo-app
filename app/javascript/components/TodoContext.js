@@ -14,12 +14,16 @@ export function TodoProvider ({ children }) {
   const [todoEdit, setTodoEdit] = useState({ item: {}, edit: false })
 
   const updateTodoItem = (id, updatedItem) => {
+      console.log('id', id)
+      console.log(updatedItem)
     setTodos(
       todos.map(item => (item.id === id ? { ...item, ...updatedItem } : item))
     )
+    console.log('new todos', todos)
   }
 
   const editTodo = item => {
+      console.log('edit todo')
     setTodoEdit({ item, edit: true })
   }
 
