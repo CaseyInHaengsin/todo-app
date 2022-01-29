@@ -10,9 +10,7 @@ function TodoList () {
         todos.map(todo => (
           <Todo
             key={todo.id}
-            id={todo.id}
-            description={todo.description}
-            task={todo.task}
+            todo={todo}
           />
         ))}
     </div>

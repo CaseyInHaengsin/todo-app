@@ -1,11 +1,13 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import TodoContext from './TodoContext'
 
 function TodoForm () {
-  const { addTodo } = useContext(TodoContext)
+  const { addTodo, todoEdit, updateTodoItem } = useContext(TodoContext)
+  const [editEnabled, setEditEnable] = useState(false)
   const [task, setTask] = useState('')
   const [error, setError] = useState('')
   const [description, setDescription] = useState('')
+
   const handleSubmit = e => {
     e.preventDefault()
     if (!task) setError('You need a task')
@@ -14,12 +16,18 @@ function TodoForm () {
     setTask('')
   }
 
+  useEffect(() => {
+    if (!todoEdit.edit === true) return
+    setEditEnable(false)
+    setTask(todoEdit.item.text)
+  }, [todoEdit])
+
   return (
-    <form onSubmit={handleSubmit} className="py-4">
+    <form onSubmit={handleSubmit} className='py-4'>
       <div className='flex-col justify-center'>
-        <div className="align-center mb-2 mt-2">
+        <div className='align-center mb-2 mt-2'>
           <input
-            className="w-1/2"
+            className='w-1/2'
             onChange={e => {
               if (error) setError('')
               setTask(e.target.value)
@@ -29,9 +37,9 @@ function TodoForm () {
             placeholder='Add Task'
           />
         </div>
-        <div className="align-center mb-2 mt-2">
+        <div className='align-center mb-2 mt-2'>
           <input
-            className="w-1/2"
+            className='w-1/2'
             onChange={e => {
               setDescription(e.target.value)
             }}
