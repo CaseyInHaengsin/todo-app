@@ -17,9 +17,9 @@
 }
 
 .background-color{
-  @apply bg-black
+  @apply dark:bg-black
 }
 
 .input{
-  @apply rounded-md border shadow-sm border-slate-300 focus-within:border-collapse
+  @apply rounded-md border shadow-sm border-slate-300
 }

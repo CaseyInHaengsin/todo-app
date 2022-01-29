@@ -8,7 +8,8 @@ export function TodoProvider ({ children }) {
     {
       id: 1,
       task: 'Get things done',
-      description: 'Do this task without asking questions'
+      description: 'Do this task without asking questions',
+      completed: false
     }
   ])
   const [todoEdit, setTodoEdit] = useState({ item: {}, edit: false })
