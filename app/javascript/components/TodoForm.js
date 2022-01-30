@@ -12,9 +12,11 @@ function TodoForm () {
     e.preventDefault()
     if (!task) setError('You need a task')
     if (todoEdit.edit === true) {
+      
       updateTodoItem(todoEdit.item.id, {
         task: task,
-        description: description
+        description: description,
+        completed: !todoEdit.item.completed
       })
     } else {
       addTodo({ task, description })
