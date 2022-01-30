@@ -3,6 +3,7 @@ import TodoContext from './TodoContext'
 
 function TodoForm () {
   const [editEnabled, setEditEnable] = useState(true)
+  const [completed, setCompleted] = useState(false)
   const [task, setTask] = useState('')
   const [error, setError] = useState('')
   const [description, setDescription] = useState('')
@@ -12,15 +13,17 @@ function TodoForm () {
     e.preventDefault()
     if (!task) setError('You need a task')
     if (todoEdit.edit === true) {
-      
       updateTodoItem(todoEdit.item.id, {
         task: task,
         description: description,
-        completed: !todoEdit.item.completed
+        completed
       })
+      if (completed === true) setCompleted(false)
+      setEditEnable(true)
     } else {
       addTodo({ task, description })
     }
+    
     setTask('')
     setDescription('')
   }
@@ -46,7 +49,7 @@ function TodoForm () {
             value={task}
             placeholder='Add Task'
           />
-        </div>        
+        </div>
         <div className='align-center mb-2 mt-2'>
           <input
             className='w-1/2 input text-color background-color'
