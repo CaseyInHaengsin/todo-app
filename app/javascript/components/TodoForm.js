@@ -3,35 +3,38 @@ import TodoContext from './TodoContext'
 
 function TodoForm () {
   const [editEnabled, setEditEnable] = useState(true)
-  const [completed, setCompleted] = useState(false)
-  const [task, setTask] = useState('')
+  const [complete, setcomplete] = useState(false)
+  const [name, setName] = useState('')
   const [error, setError] = useState('')
   const [description, setDescription] = useState('')
   const { addTodo, todoEdit, updateTodoItem } = useContext(TodoContext)
 
   const handleSubmit = e => {
     e.preventDefault()
-    if (!task) setError('You need a task')
+    if (!name){
+      setError('You need a name')
+      return
+    }
     if (todoEdit.edit === true) {
       updateTodoItem(todoEdit.item.id, {
-        task: task,
+        name: name,
         description: description,
-        completed
+        complete
       })
-      if (completed === true) setCompleted(false)
+      if (complete === true) setcomplete(false)
       setEditEnable(true)
     } else {
-      addTodo({ task, description })
+      addTodo({ name, description })
     }
     
-    setTask('')
+    setName('')
     setDescription('')
   }
 
   useEffect(() => {
     if (!todoEdit.edit === true) return
     setEditEnable(false)
-    setTask(todoEdit.item.task)
+    setName(todoEdit.item.name)
     setDescription(todoEdit.item.description)
   }, [todoEdit])
 
@@ -43,11 +46,11 @@ function TodoForm () {
             className='w-1/2 input text-color background-color'
             onChange={e => {
               if (error) setError('')
-              setTask(e.target.value)
+              setName(e.target.value)
             }}
             type='text'
-            value={task}
-            placeholder='Add Task'
+            value={name}
+            placeholder='Add name'
           />
         </div>
         <div className='align-center mb-2 mt-2'>
