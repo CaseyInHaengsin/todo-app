@@ -9,11 +9,11 @@ t = Task.create([
   {
     name: "Casey's Task",
     description: "A task for Casey to play with",
-    completed: false
+    complete: false
   },
   {
     name: 'A Completed Task',
     description: 'This task is completed',
-    completed: true
+    complete: true
   }
 ])

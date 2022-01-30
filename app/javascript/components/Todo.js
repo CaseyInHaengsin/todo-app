@@ -3,19 +3,20 @@ import TodoContext from './TodoContext'
 import { FiCheckCircle, FiCircle } from 'react-icons/fi'
 
 function Todo ({ todo }) {
-  const { deleteTodo, editTodo, updateTodoItem } = React.useContext(TodoContext)
-  const completedClick = () => {
-    updateTodoItem(todo.id, { ...todo, completed: !todo.completed })
+  const { deleteTodo, todoEdit, editTodo, updateTodoItem } = React.useContext(TodoContext)
+  const completeClick = () => {
+    if (todoEdit.edit) return
+    updateTodoItem(todo.id, { ...todo, complete: !todo.complete })
   }
   return (
     <ul>
       <li className='text-color flex justify-evenly align-middle py-4'>
-        {todo.completed ? (
-          <FiCheckCircle onClick={completedClick} size={30} />
+        {todo.complete ? (
+          <FiCheckCircle onClick={completeClick} size={30} />
         ) : (
-          <FiCircle onClick={completedClick} size={30} />
+          <FiCircle onClick={completeClick} size={30} />
         )}
-        <h4 className='basis-20'>{todo.task}</h4>
+        <h4 className='basis-20'>{todo.name}</h4>
         <p className='basis-40'>{todo.description}</p>
         <button
           onClick={() => {
