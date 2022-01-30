@@ -6,6 +6,8 @@ class Task < ApplicationRecord
   def set_completed_at
     if self.completed_at.nil? && self.complete == true
       self.completed_at = Time.now
+    elsif !self.completed_at.nil? && self.complete == false
+      self.completed_at = nil
     end
   end
 end
