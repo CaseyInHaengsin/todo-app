@@ -46,7 +46,12 @@ module.exports = {
       purple: colors.purple,
       fuchsia: colors.fuchsia,
       pink: colors.pink,
-      rose: colors.rose
+      rose: colors.rose,
+      customdark: '#1A1A40',
+      lighterblue: '#270082',
+      custompink: '#FA58B6',
+      custompurple: '#7A0BC0'
+
     }),
     columns: {
       auto: 'auto',
@@ -238,7 +243,9 @@ module.exports = {
       150: '1.5',
       200: '2'
     },
-    container: {},
+    container: {
+      center: true
+    },
     content: {
       none: 'none'
     },
@@ -947,6 +954,9 @@ module.exports = {
       40: '40',
       50: '50'
     }
+  },
+  variants: {
+    outline: ['focus'],
   },
   variantOrder: [
     'first',

@@ -3,7 +3,7 @@
 @import "tailwindcss/utilities";
 
 .btn {
-    @apply px-4 py-2 bg-purple-900 text-white rounded-md;
+    @apply px-4 py-2 bg-custompink text-white rounded-md;
 }
 
 :root{
@@ -17,9 +17,9 @@
 }
 
 .background-color{
-  @apply dark:bg-black
+  @apply dark:bg-customdark
 }
 
 .input{
-  @apply rounded-md border shadow-sm border-slate-300
+  @apply rounded-md border-custompurple shadow-sm border-slate-300 focus:ring-0 focus:border-slate-300
 }

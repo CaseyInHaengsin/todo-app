@@ -5,7 +5,7 @@ import Todo from './Todo'
 function TodoList () {
   const { todos } = React.useContext(TodoContext)
   return (
-    <div className='py-3 shadow-lg bg-gradient-to-tr from-gray-800 via-purple-900 to-violet-600/[.05]'>
+    <div className='py-3 container shadow-xl shadow-black rounded-md'>
       {todos &&
         todos.map(todo => (
           <Todo

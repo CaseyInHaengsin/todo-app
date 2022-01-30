@@ -6,7 +6,7 @@ function Todo ({ todo }) {
 
   return (
     <ul>
-      <li className='text-color flex justify-evenly py-4'>
+      <li className='text-color flex justify-evenly align-middle py-4'>
         {todo.completed ?  <FiCheckCircle size={30} /> : <FiCircle size={30} />}
         <h4 className='basis-20'>{todo.task}</h4>
         <p className='basis-40'>{todo.description}</p>
