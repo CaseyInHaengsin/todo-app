@@ -15,10 +15,10 @@ export function TodoProvider ({ children }) {
   const [todoEdit, setTodoEdit] = useState({ item: {}, edit: false })
 
   const updateTodoItem = (id, updatedItem) => {
-    console.log('updated', updatedItem)
     setTodos(
       todos.map(item => (item.id === id ? { ...item, ...updatedItem } : item))
     )
+    setTodoEdit({item: {}, edit: false})
   }
 
   const editTodo = item => {
@@ -31,7 +31,6 @@ export function TodoProvider ({ children }) {
   }
 
   const deleteTodo = id => {
-    console.log('clicked delete')
     setTodos(todos.filter(todo => todo.id !== id))
   }
 

@@ -5,7 +5,6 @@ import { FiCheckCircle, FiCircle } from 'react-icons/fi'
 function Todo ({ todo }) {
   const { deleteTodo, editTodo, updateTodoItem } = React.useContext(TodoContext)
   const completedClick = () => {
-    console.log('clicked')
     updateTodoItem(todo.id, { ...todo, completed: !todo.completed })
   }
   return (
@@ -20,7 +19,6 @@ function Todo ({ todo }) {
         <p className='basis-40'>{todo.description}</p>
         <button
           onClick={() => {
-            console.log(todo)
             editTodo(todo)
           }}
           className='text-left basis-2 btn'
