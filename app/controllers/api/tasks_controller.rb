@@ -18,11 +18,16 @@ module Api
         end
       end
     end
-    
-    def new
-    end
 
-    def created
+    def create
+      @task = Task.new(task_params)
+      respond_to do |format|
+        if @task.save
+          format.json { render :show, status: :created }
+        else
+          format.json { render json: @task.errors, status: :bad_request }
+        end
+      end
     end
 
     def destroy
