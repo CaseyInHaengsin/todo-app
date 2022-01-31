@@ -54,9 +54,16 @@ export function TodoProvider ({ children }) {
   }
 
   const addTodo = newTodo => {
-    console.log('add todo', newTodo)
-    newTodo.id = uuidv4()
-    setTodos([...todos, newTodo])
+    const add = async () => {
+      const newResp = await api.post('/api/tasks', {
+        task: newTodo
+      })
+      return newResp.data
+    }
+    add()
+      .then(data => {
+        setTodos([...todos, data?.task])
+      })
   }
 
   const deleteTodo = id => {
