@@ -13,6 +13,7 @@
     "@tailwindcss/line-clamp": "^0.3.1",
     "@tailwindcss/typography": "^0.5.0",
     "autoprefixer": "^10.2.6",
+    "axios": "^0.25.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "framer-motion": "~6.0.0",
     "postcss": "^8.2.10",
