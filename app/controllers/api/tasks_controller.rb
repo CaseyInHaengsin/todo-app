@@ -26,6 +26,13 @@ module Api
     end
 
     def destroy
+      respond_to do |format|
+        if @task.destroy
+          format.json { render json: @task, status: :accepted }
+        else
+          format.json { render json: @task.errors, status: bad_request }
+        end
+      end
     end
 
     private
