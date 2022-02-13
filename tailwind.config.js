@@ -51,7 +51,6 @@ module.exports = {
       lighterblue: '#270082',
       custompink: '#FA58B6',
       custompurple: '#7A0BC0'
-
     }),
     columns: {
       auto: 'auto',
@@ -956,7 +955,7 @@ module.exports = {
     }
   },
   variants: {
-    outline: ['focus'],
+    outline: ['focus']
   },
   variantOrder: [
     'first',

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import Error from './Error'
 import { v4 as uuidv4 } from 'uuid'
 
 const TodoContext = React.createContext()
@@ -11,16 +12,16 @@ export function TodoProvider ({ children }) {
     baseURL: BASE_URL
   })
   const [todos, setTodos] = useState([])
+  const [error, setError] = useState('')
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const getTasks = async () => {
-      const resp = await api.get('/api/tasks')
-      const data = resp?.data
-      return data
+      return await api.get('/api/tasks')
     }
 
-    getTasks().then(data => {
+    getTasks().then(resp => {
+      const data = resp?.data
       setTodos(data.tasks)
     })
   }, [])
@@ -29,13 +30,13 @@ export function TodoProvider ({ children }) {
 
   const updateTodoItem = (id, updatedItem) => {
     const updateItem = async () => {
-      const updatedResp = await axios.put(`/api/tasks/${id}`, {
+      return await axios.put(`/api/tasks/${id}`, {
         task: updatedItem
       })
-      return updatedResp.data
     }
     updateItem()
-      .then(data => {
+      .then(resp => {
+        const data = resp?.data
         setTodos(
           todos.map(item =>
             item.id === id ? { ...item, ...updatedItem } : item
@@ -44,8 +45,7 @@ export function TodoProvider ({ children }) {
         setTodoEdit({ item: {}, edit: false })
       })
       .catch(err => {
-        // TODO: Work on error handling here
-        console.log(err)
+        setError(JSON.stringify(err))
       })
   }
 
@@ -55,35 +55,40 @@ export function TodoProvider ({ children }) {
 
   const addTodo = newTodo => {
     const add = async () => {
-      const newResp = await api.post('/api/tasks', {
+      return await api.post('/api/tasks', {
         task: newTodo
       })
-      return newResp.data
+      // return newResp.data
     }
     add()
-      .then(data => {
+      .then(resp => {
+        const data = resp?.data
         setTodos([...todos, data?.task])
+      })
+      .catch(err => {
+        setError(err)
       })
   }
 
   const deleteTodo = id => {
     const deleteTodo = async () => {
-      const deleted = await api.delete(`/api/tasks/${id}`)
-      return deleted
+      return await api.delete(`/api/tasks/${id}`)
     }
 
-    deleteTodo().then(resp => {
-      setTodos(todos.filter(todo => todo.id !== id))
-    })
-    .catch(err => {
-      console.log(err)
-    })
+    deleteTodo()
+      .then(resp => {
+        setTodos(todos.filter(todo => todo.id !== id))
+      })
+      .catch(err => {
+        setError(JSON.stringify(err))
+      })
   }
-
   return (
     <TodoContext.Provider
+      id='modal-content'
       value={{
         todos,
+        error,
         addTodo,
         deleteTodo,
         editTodo,
