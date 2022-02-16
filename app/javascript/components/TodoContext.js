@@ -116,7 +116,9 @@ export function TodoProvider ({ children }) {
         deleteTodo,
         editTodo,
         todoEdit,
-        updateTodoItem
+        updateTodoItem,
+        searchTerm,
+        setSearchTerm
       }}
     >
       {children}
