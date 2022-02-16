@@ -14,6 +14,7 @@ export function TodoProvider ({ children }) {
 
   const [todos, setTodos] = useState([])
   const [error, setError] = useState('')
+  const [searchTerm, setSearchTerm] = useState('')
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -110,7 +111,8 @@ export function TodoProvider ({ children }) {
         todos,
         error,
         addTodo,
-        filterTodos,
+        setSearchTerm,
+        searchTerm,
         deleteTodo,
         editTodo,
         todoEdit,

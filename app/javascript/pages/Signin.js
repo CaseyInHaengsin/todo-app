@@ -1,11 +1,9 @@
 import React from 'react'
 
-function Signin () {
+export default function Signin () {
   return (
     <div className='flex justify-center'>
       <h1>Signin</h1>
     </div>
   )
 }
-
-export default Signin

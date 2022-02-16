@@ -1,7 +1,7 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
 
-function Error (props) {
+export default function Error (props) {
   React.useEffect(() => {
     if (props.msg) {
       const el = document.getElementById('error-modal')
@@ -28,5 +28,3 @@ function Error (props) {
   }
   return props.children
 }
-
-export default Error

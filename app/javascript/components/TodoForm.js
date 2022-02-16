@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import TodoContext from './TodoContext'
 
-function TodoForm () {
+export default function TodoForm () {
   const [editEnabled, setEditEnable] = useState(true)
   const [complete, setcomplete] = useState(false)
   const [name, setName] = useState('')
@@ -74,5 +74,3 @@ function TodoForm () {
     </form>
   )
 }
-
-export default TodoForm
