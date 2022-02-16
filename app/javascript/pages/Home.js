@@ -6,7 +6,7 @@ import TodoList from '../components/TodoList'
 import Search from '../components/Search'
 import { FiPlus } from 'react-icons/fi'
 
-function Home () {
+export default function Home () {
   return (
     <TodoProvider>
       <div className='font-sans background-color h-1/3 flex flex-col w-full'>
@@ -33,5 +33,3 @@ function Home () {
     </TodoProvider>
   )
 }
-
-export default Home

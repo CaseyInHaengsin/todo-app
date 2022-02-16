@@ -3,7 +3,7 @@ import TodoContext from './TodoContext'
 import { FiCheckCircle, FiCircle } from 'react-icons/fi'
 import Error from './Error'
 
-function Todo ({ todo }) {
+export default function Todo ({ todo }) {
   const {
     deleteTodo,
     todoEdit,
@@ -51,5 +51,3 @@ function Todo ({ todo }) {
     </Error>
   )
 }
-
-export default Todo

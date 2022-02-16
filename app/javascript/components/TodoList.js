@@ -3,7 +3,7 @@ import TodoContext from './TodoContext'
 import { motion, AnimatePresence } from 'framer-motion/dist/framer-motion'
 import Todo from './Todo'
 
-function TodoList () {
+export default function TodoList () {
   const { todos, searchTerm } = useContext(TodoContext)
   const [list, setList] = useState([])
 
@@ -44,5 +44,3 @@ function TodoList () {
     </div>
   )
 }
-
-export default TodoList
