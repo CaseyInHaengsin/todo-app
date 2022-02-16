@@ -1,28 +1,28 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 .btn {
-    @apply px-4 py-2 bg-custompink text-white rounded-md;
+  @apply px-4 py-2 bg-custompink text-white rounded-md;
 }
 
-.btn:hover{
-  @apply bg-custompink
+.btn:hover {
+  @apply bg-custompink;
 }
 
-:root{
+:root {
   --primary-bright-blue: hsl(220, 98%, 61%);
   --check-background: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
 }
 
-.text-color{
-  @apply text-white
+.text-color {
+  @apply text-white;
 }
 
-.background-color{
-  @apply bg-customdark
+.background-color {
+  @apply bg-customdark;
 }
 
-.input{
-  @apply rounded-md border-custompurple shadow-sm border-slate-300 focus:ring-0 focus:border-slate-300
+.input {
+  @apply rounded-md border-custompurple shadow-sm border-slate-300 focus:ring-0 focus:border-slate-300;
 }
