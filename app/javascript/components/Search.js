@@ -1,18 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FiPlus } from 'react-icons/fi'
+import TodoContext from './TodoContext'
 // TODO - Add todocontext and narrow task list based on search
 function Search () {
+  const { searchTerm, setSearchTerm } = useContext(TodoContext)
   const [search, setSearch] = React.useState('')
   const form = document.getElementById('add-form')
-  window.onClick = function (event) {
-    document.getElementById('add-form').style.display = 'none'
-  }
+
   return (
     <input
       type='search'
-      value={search}
+      value={searchTerm}
       className='w-1/2 rounded-md text-color background-color'
-      onChange={e => setSearch(e.target.value)}
+      onChange={e => setSearchTerm(e.target.value)}
     />
   )
 }
