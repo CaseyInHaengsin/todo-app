@@ -11,6 +11,7 @@ module Api
     
     def update
       respond_to do |format|
+        format.json { render json: @task.errors, status: :bad_request }
         if @task.update(task_params)
           format.json { render :show, status: :ok }
         else

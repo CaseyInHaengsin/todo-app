@@ -11,6 +11,7 @@ export function TodoProvider ({ children }) {
   const api = axios.create({
     baseURL: BASE_URL
   })
+
   const [todos, setTodos] = useState([])
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(true)
@@ -49,6 +50,26 @@ export function TodoProvider ({ children }) {
       })
   }
 
+  const filterTodos = filter => {
+    if (filter === '') {
+      const getTasks = async () => {
+        return await api.get('/api/tasks')
+      }
+
+      getTasks().then(resp => {
+        const data = resp?.data
+        setTodos(data.tasks)
+      })
+    }
+    return setTodos(
+      todos.filter(
+        todo =>
+          todo?.name.toLowerCase().includes(filter) ||
+          todo?.description.toLowerCase().includes(filter)
+      )
+    )
+  }
+
   const editTodo = item => {
     setTodoEdit({ item, edit: true })
   }
@@ -58,7 +79,6 @@ export function TodoProvider ({ children }) {
       return await api.post('/api/tasks', {
         task: newTodo
       })
-      // return newResp.data
     }
     add()
       .then(resp => {
@@ -90,6 +110,7 @@ export function TodoProvider ({ children }) {
         todos,
         error,
         addTodo,
+        filterTodos,
         deleteTodo,
         editTodo,
         todoEdit,
