@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import TodoContext from './TodoContext'
 
-function TodoForm () {
+export default function TodoForm () {
   const [editEnabled, setEditEnable] = useState(true)
   const [complete, setcomplete] = useState(false)
   const [name, setName] = useState('')
@@ -11,7 +11,7 @@ function TodoForm () {
 
   const handleSubmit = e => {
     e.preventDefault()
-    if (!name){
+    if (!name) {
       setError('You need a name')
       return
     }
@@ -26,7 +26,7 @@ function TodoForm () {
     } else {
       addTodo({ name, description })
     }
-    
+    document.getElementById('add-form').style.display = 'none'
     setName('')
     setDescription('')
   }
@@ -39,7 +39,11 @@ function TodoForm () {
   }, [todoEdit])
 
   return (
-    <form onSubmit={handleSubmit} className='py-4'>
+    <form
+      onSubmit={handleSubmit}
+      id='add-form'
+      className='py-4 hidden z-1 fixed w-full h-1/2 overflow-auto py-8 bg-slate-400/[.9]'
+    >
       <div className='flex-col justify-center'>
         <div className='align-center mb-2 mt-2 focus:outline-none '>
           <input
@@ -70,5 +74,3 @@ function TodoForm () {
     </form>
   )
 }
-
-export default TodoForm
