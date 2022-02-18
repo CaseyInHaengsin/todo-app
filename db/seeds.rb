@@ -5,15 +5,18 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+u = User.create({login_id: "casey", password:"I just wanna fly!"})
 Task.create([
   {
     name: "Casey's Task",
     description: "A task for Casey to play with",
-    complete: false
+    complete: false,
+    user_id: u.id
   },
   {
     name: 'A Completed Task',
     description: 'This task is completed',
-    complete: true
+    complete: true,
+    user_id: u.id
   }
 ])
