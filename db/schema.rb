@@ -10,13 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_30_191346) do
+ActiveRecord::Schema.define(version: 2022_02_16_231416) do
 
   create_table "tasks", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.datetime "completed_at"
     t.boolean "complete"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "login_id"
+    t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
