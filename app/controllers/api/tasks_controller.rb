@@ -1,6 +1,7 @@
 module Api
   class TasksController < ApiController
     skip_before_action :verify_authenticity_token
+    before_action :require_login
     before_action :set_task, only: %i[ show update destroy ]
 
     def index
