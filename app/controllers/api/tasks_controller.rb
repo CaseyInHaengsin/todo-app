@@ -5,7 +5,7 @@ module Api
     before_action :set_task, only: %i[ show update destroy ]
 
     def index
-      @tasks = Task.all
+      @tasks = @user.tasks
     end
 
     def show; end
@@ -22,7 +22,7 @@ module Api
     end
 
     def create
-      @task = Task.new(task_params)
+      @task = @user.tasks.new(task_params)
       respond_to do |format|
         if @task.save
           format.json { render :show, status: :created }
@@ -48,7 +48,7 @@ module Api
       end
 
       def task_params
-        params.require(:task).permit(:name, :description, :completed_at, :complete)
+        params.require(:task).permit(:name, :description, :completed_at, :complete, :user_id)
       end
   end
 end

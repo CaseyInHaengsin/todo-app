@@ -1,4 +1,8 @@
 class ApplicationController < ActionController::Base
+  def require_login
+    render json: { message: "You must log in before doing that" }, status: :unauthorized unless !!session_user
+  end
+
   protected
 
   def session_user
