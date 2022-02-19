@@ -1,6 +1,8 @@
 class AuthController < ApplicationController
   skip_before_action :verify_authenticity_token
 
+  def new; end
+  
   def login
     puts "in login"
     user = User.find_by(login_id: params[:login_id])

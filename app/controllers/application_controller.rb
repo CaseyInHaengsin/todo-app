@@ -1,25 +1,36 @@
 class ApplicationController < ActionController::Base
+
+  def require_login
+    render json: { message: "You must log in first" }, status: :unauthorized unless !!session_user
+  end
+
   protected
 
   def session_user
     decoded_hash = decoded_token
+    puts "looking for user"
     if decoded_hash.present?
+      puts "found current user"
       user_id = decoded_hash[0]['user_id']
       @user = User.find(user_id)
     end
   end
 
   def encode_token(payload)
-    JWT.encode(payload, Rails.application.credentials.secret_key_base)
+    JWT.encode(payload, Rails.application.secret_key_base)
+  end
+
+  def auth_header
+    request.headers['authorization']
   end
 
   def decoded_token
-    if request.headers['authorization']
+    if auth_header
       token = auth_header.split(' ')[1]
       begin
         JWT.decode(
           token,
-          Rails.application.credentials.secret_key_base,
+          Rails.application.secret_key_base,
           true,
           algorithm: 'HS256'
         )

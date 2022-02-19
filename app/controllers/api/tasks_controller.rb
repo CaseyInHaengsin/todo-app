@@ -22,7 +22,7 @@ module Api
     end
 
     def create
-      @task = Task.new(task_params)
+      @task = @user.tasks.new(task_params)
       respond_to do |format|
         if @task.save
           format.json { render :show, status: :created }

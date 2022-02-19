@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   end
   root 'home#index'
   post '/login' => 'auth#login'
+  get '/login' => 'auth#new'
   get '/*path' => 'home#index'
 end
