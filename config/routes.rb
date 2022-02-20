@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     resources :tasks
   end
   root 'home#index'
+  get '/*path' => 'home#index'
   post '/login' => 'auth#login'
   get '/login' => 'auth#new'
-  get '/*path' => 'home#index'
 end

@@ -5,20 +5,23 @@ import { v4 as uuidv4 } from 'uuid'
 
 const TodoContext = React.createContext()
 const BASE_URL = 'http://localhost:3000'
-const Token = localStorage.getItem('token');
+const Token = localStorage.getItem('token')
 
 export function TodoProvider ({ children }) {
   const api = axios.create({
     baseURL: BASE_URL,
-    headers: {'Authorization': `Bearer ${Token}`}
+    headers: { Authorization: `Bearer ${Token}` }
   })
 
+  const [user, setUser] = useState({})
   const [todos, setTodos] = useState([])
   const [error, setError] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    console.log('user', user)
+    if (!user) return
     const getTasks = async () => {
       return await api.get('/api/tasks')
     }
@@ -112,6 +115,9 @@ export function TodoProvider ({ children }) {
         todos,
         error,
         addTodo,
+        Token,
+        user,
+        setUser,
         setSearchTerm,
         searchTerm,
         deleteTodo,
