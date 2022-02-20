@@ -33,7 +33,7 @@ export function TodoProvider ({ children }) {
 
   const updateTodoItem = (id, updatedItem) => {
     const updateItem = async () => {
-      return await axios.put(`/api/tasks/${id}`, {
+      return await api.put(`/api/tasks/${id}`, {
         task: updatedItem
       })
     }

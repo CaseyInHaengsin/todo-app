@@ -3,6 +3,7 @@ module Api
     skip_before_action :verify_authenticity_token
     before_action :require_login
     before_action :set_task, only: %i[ show update destroy ]
+    before_action :check_user, only: %i[ show update destroy ]
 
     def index
       @tasks = @user.tasks
@@ -12,7 +13,6 @@ module Api
     
     def update
       respond_to do |format|
-        format.json { render json: @task.errors, status: :bad_request }
         if @task.update(task_params)
           format.json { render :show, status: :ok }
         else
@@ -49,6 +49,10 @@ module Api
 
       def task_params
         params.require(:task).permit(:name, :description, :completed_at, :complete, :user_id)
+      end
+
+      def check_user
+        render json: {"error":"you don't own that task"}, status: :forbidden unless @task.user == @user
       end
   end
 end

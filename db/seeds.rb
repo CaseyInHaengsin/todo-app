@@ -20,3 +20,5 @@ Task.create([
     user_id: u.id
   }
 ])
+
+User.create({login_id:"brock",password:"password123"})
