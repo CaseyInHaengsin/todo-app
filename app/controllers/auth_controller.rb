@@ -4,7 +4,6 @@ class AuthController < ApplicationController
   def new; end
   
   def login
-    puts "in login"
     user = User.find_by(login_id: params[:login_id])
     if user&.authenticate(params[:password])
       payload = { user_id: user.id }
