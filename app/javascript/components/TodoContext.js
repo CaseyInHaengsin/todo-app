@@ -4,12 +4,13 @@ import Error from './Error'
 import { v4 as uuidv4 } from 'uuid'
 
 const TodoContext = React.createContext()
-
 const BASE_URL = 'http://localhost:3000'
+const Token = localStorage.getItem('token');
 
 export function TodoProvider ({ children }) {
   const api = axios.create({
-    baseURL: BASE_URL
+    baseURL: BASE_URL,
+    headers: {'Authorization': `Bearer ${Token}`}
   })
 
   const [todos, setTodos] = useState([])
