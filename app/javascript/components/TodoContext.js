@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
+import UserContext from './context/UserContext'
 import Error from './Error'
 import { v4 as uuidv4 } from 'uuid'
 
 const TodoContext = React.createContext()
 const BASE_URL = 'http://localhost:3000'
-const Token = localStorage.getItem('token');
+let Token = localStorage.getItem('token')
 
 export function TodoProvider ({ children }) {
   const api = axios.create({
     baseURL: BASE_URL,
-    headers: {'Authorization': `Bearer ${Token}`}
+    headers: { Authorization: `Bearer ${Token}` }
   })
+
+  const { loadingUser, user } = useContext(UserContext)
 
   const [todos, setTodos] = useState([])
   const [error, setError] = useState('')
@@ -19,15 +22,18 @@ export function TodoProvider ({ children }) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const getTasks = async () => {
-      return await api.get('/api/tasks')
+    if (loadingUser === false && user?.id && localStorage.getItem('token')) {
+      const getTasks = async () => {
+        return await axios.get(`${BASE_URL}/api/tasks`, {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+        })
+      }
+      getTasks().then(resp => {
+        const data = resp?.data
+        setTodos(data.tasks)
+      })
     }
-
-    getTasks().then(resp => {
-      const data = resp?.data
-      setTodos(data.tasks)
-    })
-  }, [])
+  }, [loadingUser])
 
   const [todoEdit, setTodoEdit] = useState({ item: {}, edit: false })
 
@@ -112,6 +118,7 @@ export function TodoProvider ({ children }) {
         todos,
         error,
         addTodo,
+        Token,
         setSearchTerm,
         searchTerm,
         deleteTodo,

@@ -1,6 +1,5 @@
 class Task < ApplicationRecord
   validates :name, presence: true
-  validates :description, length: { minimum: 3 }
   before_save :set_completed_at
   belongs_to :user
   
