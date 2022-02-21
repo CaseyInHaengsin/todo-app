@@ -8,9 +8,7 @@ class ApplicationController < ActionController::Base
 
   def session_user
     decoded_hash = decoded_token
-    puts "looking for user"
     if decoded_hash.present?
-      puts "found current user"
       user_id = decoded_hash[0]['user_id']
       @user = User.find(user_id)
     end
