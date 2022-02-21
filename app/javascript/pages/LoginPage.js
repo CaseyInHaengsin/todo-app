@@ -6,7 +6,7 @@ import Header from '../components/Header'
 import Loader from '../components/Loader'
 
 export default function LoginPage () {
-  const { user, loadingUser } = React.useContext(UserContext)
+  const { user, loadingUser, error } = React.useContext(UserContext)
   let navigate = useNavigate()
 
   if (loadingUser === false && user?.id) {

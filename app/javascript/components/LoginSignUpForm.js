@@ -10,10 +10,10 @@ export default function LoginSignUpForm ({
 }) {
   const location = useLocation()
 
-  const { userLogin, user } = React.useContext(UserContext)
+  const { userLogin, user, error } = React.useContext(UserContext)
   const [loginId, setLoginId] = React.useState('')
   const [password, setPassword] = React.useState('')
-  const [error, setError] = React.useState('')
+
   const [passwordConfirmation, setPasswordConfirmation] = React.useState('')
 
   async function handleSubmit (e) {
@@ -29,8 +29,13 @@ export default function LoginSignUpForm ({
       navigate('/')
     }
   }, [user])
-  if (error) return <h1 className='text-xl text-red-500'>{error}</h1>
 
+  if (error) {
+    window.addEventListener('click', () => {
+      window.location.reload()
+    })
+    return <h1 className='text-xl text-red-500'>{error}</h1>
+  }
   return (
     <form
       onSubmit={handleSubmit}

@@ -12,6 +12,7 @@ export function UserProvider ({ children }) {
   })
 
   const [user, setUser] = React.useState({})
+  const [error, setError] = React.useState('')
   const [loadingUser, setLoadingUser] = React.useState(true)
 
   React.useEffect(() => {
@@ -24,6 +25,7 @@ export function UserProvider ({ children }) {
           setLoadingUser(false)
         })
         .catch(err => {
+          setError(err?.response?.message)
           setLoadingUser(false)
         })
     }
@@ -44,7 +46,7 @@ export function UserProvider ({ children }) {
         localStorage.setItem('token', user.jwt)
       })
       .catch(err => {
-        setError(JSON.stringify(err))
+        setError(JSON.stringify(err?.message))
       })
   }
 
@@ -53,6 +55,7 @@ export function UserProvider ({ children }) {
       value={{
         userLogin,
         user,
+        error,
         loadingUser,
         setUser,
         setLoadingUser
