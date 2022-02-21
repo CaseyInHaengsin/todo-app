@@ -1,5 +1,4 @@
 import React from 'react'
-import { Redirect } from 'react-router-dom'
 import TodoContext from './TodoContext'
 import { FiCheckCircle, FiCircle } from 'react-icons/fi'
 import Error from './Error'
