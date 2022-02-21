@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
+import UserContext from './context/UserContext'
 import Error from './Error'
 import { v4 as uuidv4 } from 'uuid'
 
 const TodoContext = React.createContext()
 const BASE_URL = 'http://localhost:3000'
-const Token = localStorage.getItem('token')
+let Token = localStorage.getItem('token')
 
 export function TodoProvider ({ children }) {
   const api = axios.create({
@@ -13,30 +14,32 @@ export function TodoProvider ({ children }) {
     headers: { Authorization: `Bearer ${Token}` }
   })
 
-  const [user, setUser] = useState({})
+  const { loadingUser, user } = useContext(UserContext)
+
   const [todos, setTodos] = useState([])
   const [error, setError] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    console.log('user', user)
-    if (!user) return
-    const getTasks = async () => {
-      return await api.get('/api/tasks')
+    if (loadingUser === false && user?.id && localStorage.getItem('token')) {
+      const getTasks = async () => {
+        return await axios.get(`${BASE_URL}/api/tasks`, {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+        })
+      }
+      getTasks().then(resp => {
+        const data = resp?.data
+        setTodos(data.tasks)
+      })
     }
-
-    getTasks().then(resp => {
-      const data = resp?.data
-      setTodos(data.tasks)
-    })
-  }, [])
+  }, [loadingUser])
 
   const [todoEdit, setTodoEdit] = useState({ item: {}, edit: false })
 
   const updateTodoItem = (id, updatedItem) => {
     const updateItem = async () => {
-      return await axios.put(`/api/tasks/${id}`, {
+      return await api.put(`/api/tasks/${id}`, {
         task: updatedItem
       })
     }
@@ -116,8 +119,6 @@ export function TodoProvider ({ children }) {
         error,
         addTodo,
         Token,
-        user,
-        setUser,
         setSearchTerm,
         searchTerm,
         deleteTodo,

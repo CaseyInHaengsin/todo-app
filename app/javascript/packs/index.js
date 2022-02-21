@@ -5,11 +5,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from '../App'
-
+import { UserProvider } from '../components/context/UserContext'
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <App />,
+    <UserProvider>
+      <App />
+    </UserProvider>,
     document.body.appendChild(document.createElement('div'))
   )
 })

@@ -1,7 +1,16 @@
 import React from 'react'
 import Header from './Header'
+import UserContext from './context/UserContext'
+import { useLocation } from 'react-router-dom'
 
-export default function LoginSignUpForm ({ title, confirmPassword = false }) {
+export default function LoginSignUpForm ({
+  title,
+  confirmPassword = false,
+  navigate
+}) {
+  const location = useLocation()
+
+  const { userLogin, user } = React.useContext(UserContext)
   const [loginId, setLoginId] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [error, setError] = React.useState('')
@@ -9,9 +18,17 @@ export default function LoginSignUpForm ({ title, confirmPassword = false }) {
 
   async function handleSubmit (e) {
     e.preventDefault()
-
-    if (password !== passwordConfirmation) setError('Passwords do not match')
+    if (password !== passwordConfirmation && location.pathname !== '/login') {
+      setError('Passwords do not match')
+    }
+    userLogin(loginId, password, location.pathname)
   }
+
+  React.useEffect(() => {
+    if (user?.id) {
+      navigate('/')
+    }
+  }, [user])
   if (error) return <h1 className='text-xl text-red-500'>{error}</h1>
 
   return (
