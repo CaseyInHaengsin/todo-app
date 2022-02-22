@@ -1,7 +1,6 @@
 import React from 'react'
 
 export default function Error (props) {
-  console.log('in error', props.msg)
   React.useEffect(() => {
     if (props.msg) {
       const el = document.getElementById('error-modal')
