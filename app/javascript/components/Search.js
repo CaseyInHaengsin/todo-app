@@ -4,9 +4,10 @@ import TodoContext from './TodoContext'
 // TODO - Add todocontext and narrow task list based on search
 
 export default function Search () {
-
   const { searchTerm, setSearchTerm } = useContext(TodoContext)
+
   const [search, setSearch] = React.useState('')
+
   const form = document.getElementById('add-form')
 
   return (
