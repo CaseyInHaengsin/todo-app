@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { Navigate } from 'react-router-dom'
 const UserContext = React.createContext()
-const BASE_URL = 'http://localhost:3000'
+const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3000'
 const Token = localStorage.getItem('token')
 
 export function UserProvider ({ children }) {

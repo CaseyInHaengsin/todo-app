@@ -5,7 +5,7 @@ import Error from './Error'
 import { v4 as uuidv4 } from 'uuid'
 
 const TodoContext = React.createContext()
-const BASE_URL = 'http://localhost:3000'
+const BASE_URL = process.env.BASE_URL ?? 'http://localhost:3000'
 let Token = localStorage.getItem('token')
 
 export function TodoProvider ({ children }) {
