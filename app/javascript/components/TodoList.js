@@ -3,7 +3,7 @@ import TodoContext from './TodoContext'
 import { motion, AnimatePresence } from 'framer-motion/dist/framer-motion'
 import Todo from './Todo'
 
-export default function TodoList () {
+export default function TodoList ({ setShowModal }) {
   const { todos, searchTerm } = useContext(TodoContext)
   const [list, setList] = useState([])
 
@@ -27,7 +27,7 @@ export default function TodoList () {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
-                <Todo key={item.id} todo={item} />
+                <Todo key={item.id} todo={item} setShowModal={setShowModal} />
               </motion.div>
             ))
           : todos.map(todo => (
@@ -37,7 +37,7 @@ export default function TodoList () {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
-                <Todo key={todo.id} todo={todo} />
+                <Todo key={todo.id} todo={todo} setShowModal={setShowModal} />
               </motion.div>
             ))}
       </AnimatePresence>

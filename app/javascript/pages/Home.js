@@ -11,6 +11,7 @@ import Loader from '../components/Loader'
 
 export default function Home () {
   const { user, loadingUser } = React.useContext(UserContext)
+  const { showModal, setShowModal } = React.useContext(TodoContext)
   let navigate = useNavigate()
   if (loadingUser === false && !user?.id) {
     return <Navigate to='/login' />
@@ -24,21 +25,22 @@ export default function Home () {
         <div className='font-sans background-color h-1/3 flex flex-col w-full'>
           <Header navigate={navigate} />
           <div className='flex justify-center p-5'>
+            {showModal && (
+              <TodoForm setShowModal={setShowModal} showModal={showModal} />
+            )}
             <Search />
             <FiPlus
               onClick={() => {
-                const d = document.getElementById('add-form')
-                document.body.classList.add('bg-slate-300/[.05]')
-                d.style.display = 'block'
+                setShowModal(true)
               }}
               color='white'
               size={40}
             />
           </div>
+
           <div id='modal-content' className='px-4 py-38'>
             <div className='background-color h-screen relative w-full text-center'>
-              <TodoForm />
-              <TodoList />
+              <TodoList setShowModal={setShowModal} />
             </div>
           </div>
         </div>

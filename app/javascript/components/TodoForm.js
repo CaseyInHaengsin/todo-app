@@ -1,13 +1,16 @@
 import React, { useState, useContext, useEffect } from 'react'
+import { FaTimes } from 'react-icons/fa'
 import TodoContext from './TodoContext'
 
-export default function TodoForm () {
+export default function TodoForm ({ setShowModal, showModal }) {
   const [editEnabled, setEditEnable] = useState(true)
   const [complete, setcomplete] = useState(false)
   const [name, setName] = useState('')
   const [error, setError] = useState('')
   const [description, setDescription] = useState('')
-  const { addTodo, todoEdit, updateTodoItem } = useContext(TodoContext)
+  const { addTodo, todoEdit, updateTodoItem, setTodoEdit } = useContext(
+    TodoContext
+  )
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -21,12 +24,18 @@ export default function TodoForm () {
         description: description,
         complete
       })
-      if (complete === true) setcomplete(false)
+
+      if (complete === true) {
+        setcomplete(false)
+        setShowModal(false)
+      }
       setEditEnable(true)
+      setShowModal(false)
     } else {
       addTodo({ name, description })
+      setShowModal(false)
     }
-    document.getElementById('add-form').style.display = 'none'
+
     setName('')
     setDescription('')
   }
@@ -36,18 +45,28 @@ export default function TodoForm () {
     setEditEnable(false)
     setName(todoEdit.item.name)
     setDescription(todoEdit.item.description)
-  }, [todoEdit])
+  }, [todoEdit, showModal])
 
   return (
     <form
       onSubmit={handleSubmit}
-      id='add-form'
-      className='py-4 hidden z-1 fixed w-full h-1/2 overflow-auto py-8 bg-slate-400/[.9]'
+      className='flex z-20 fixed w-11/12 h-3/4 bg-slate-400/[.9] justify-center'
     >
-      <div className='flex-col justify-center'>
-        <div className='align-center mb-2 mt-2 focus:outline-none '>
+      <FaTimes
+        className='absolute right-5 top-2'
+        size={30}
+        onClick={() => {
+          setEditEnable(false)
+          setShowModal(false)
+          setTodoEdit({ item: {}, edit: false })
+          setName('')
+          setDescription('')
+        }}
+      />
+      <div className='my-3 mt-16'>
+        <div className='mb-2 mt-2 focus:outline-none w-80'>
           <input
-            className='w-1/2 input text-color background-color'
+            className='input text-color w-full background-color'
             onChange={e => {
               if (error) setError('')
               setName(e.target.value)
@@ -57,9 +76,9 @@ export default function TodoForm () {
             placeholder='Add name'
           />
         </div>
-        <div className='align-center mb-2 mt-2'>
+        <div className='align-center w-full mb-2 mt-2'>
           <input
-            className='w-1/2 input text-color background-color'
+            className='input w-80 text-color background-color'
             onChange={e => {
               setDescription(e.target.value)
             }}
@@ -69,7 +88,7 @@ export default function TodoForm () {
           />
         </div>
         {error && <h5>Error {error}</h5>}
-        <button className='btn w-1/2'>{editEnabled ? 'Add' : 'Update'}</button>
+        <button className='btn w-full'>{editEnabled ? 'Add' : 'Update'}</button>
       </div>
     </form>
   )

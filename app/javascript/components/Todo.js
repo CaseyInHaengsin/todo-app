@@ -3,7 +3,7 @@ import TodoContext from './TodoContext'
 import { FiCheckCircle, FiCircle } from 'react-icons/fi'
 import Error from './Error'
 
-export default function Todo ({ todo }) {
+export default function Todo ({ todo, setShowModal }) {
   const {
     deleteTodo,
     todoEdit,
@@ -29,9 +29,7 @@ export default function Todo ({ todo }) {
           <p className='basis-40'>{todo.description}</p>
           <button
             onClick={() => {
-              const d = document.getElementById('add-form')
-              // document.body.classList.add('bg-slate-400/[.4]')
-              d.style.display = 'block'
+              setShowModal(true)
               editTodo(todo)
             }}
             className='text-left basis-2 btn'

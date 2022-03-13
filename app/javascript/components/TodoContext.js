@@ -16,10 +16,11 @@ export function TodoProvider ({ children }) {
 
   const { loadingUser, user } = useContext(UserContext)
 
+  const [showModal, setShowModal] = useState(false)
   const [todos, setTodos] = useState([])
   const [error, setError] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     if (loadingUser === false && user?.id && localStorage.getItem('token')) {
@@ -33,7 +34,7 @@ export function TodoProvider ({ children }) {
         setTodos(data.tasks)
       })
     }
-  }, [loadingUser])
+  }, [loadingUser, loading])
 
   const [todoEdit, setTodoEdit] = useState({ item: {}, edit: false })
 
@@ -126,7 +127,10 @@ export function TodoProvider ({ children }) {
         todoEdit,
         updateTodoItem,
         searchTerm,
-        setSearchTerm
+        showModal,
+        setShowModal,
+        setSearchTerm,
+        setTodoEdit
       }}
     >
       {children}

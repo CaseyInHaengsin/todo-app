@@ -6,7 +6,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from '../App'
 import { UserProvider } from '../components/context/UserContext'
-
+import { TodoProvider } from '../components/TodoContext'
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
     <UserProvider>
