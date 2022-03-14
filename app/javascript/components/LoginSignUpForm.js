@@ -10,7 +10,9 @@ export default function LoginSignUpForm ({
 }) {
   const location = useLocation()
 
-  const { userLogin, user, error } = React.useContext(UserContext)
+  const { userLogin, user, error, setLoadingUser } = React.useContext(
+    UserContext
+  )
   const [loginId, setLoginId] = React.useState('')
   const [password, setPassword] = React.useState('')
 
@@ -21,6 +23,7 @@ export default function LoginSignUpForm ({
     if (password !== passwordConfirmation && location.pathname !== '/login') {
       setError('Passwords do not match')
     }
+
     userLogin(loginId, password, location.pathname)
   }
 

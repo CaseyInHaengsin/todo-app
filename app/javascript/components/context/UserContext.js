@@ -44,6 +44,7 @@ export function UserProvider ({ children }) {
         const user = resp?.data
         setUser({ user: user?.user, id: user.id })
         localStorage.setItem('token', user.jwt)
+        setLoadingUser(false)
       })
       .catch(err => {
         setError(JSON.stringify(err?.message))

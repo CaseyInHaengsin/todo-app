@@ -34,7 +34,7 @@ export function TodoProvider ({ children }) {
         setTodos(data.tasks)
       })
     }
-  }, [loadingUser, loading])
+  }, [loadingUser])
 
   const [todoEdit, setTodoEdit] = useState({ item: {}, edit: false })
 
