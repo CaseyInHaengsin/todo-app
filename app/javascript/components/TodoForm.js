@@ -50,7 +50,7 @@ export default function TodoForm ({ setShowModal, showModal }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className='flex z-20 fixed w-11/12 h-3/4 bg-slate-400/[.9] justify-center'
+      className='flex z-20 fixed w-4/5 h-3/4 bg-black/[.25] justify-center'
     >
       <FaTimes
         className='absolute right-5 top-2'
@@ -64,9 +64,9 @@ export default function TodoForm ({ setShowModal, showModal }) {
         }}
       />
       <div className='my-3 mt-16'>
-        <div className='mb-2 mt-2 focus:outline-none w-80'>
+        <div className='mb-2 mt-2 py-2 focus:outline-none w-80'>
           <input
-            className='input text-color w-full background-color'
+            className='input text-color w-full background-color mb-2'
             onChange={e => {
               if (error) setError('')
               setName(e.target.value)
@@ -76,9 +76,9 @@ export default function TodoForm ({ setShowModal, showModal }) {
             placeholder='Add name'
           />
         </div>
-        <div className='align-center w-full mb-2 mt-2'>
+        <div className='align-center w-full mb-2 mt-2 py-2'>
           <input
-            className='input w-80 text-color background-color'
+            className='input w-80 mb-2 text-color background-color'
             onChange={e => {
               setDescription(e.target.value)
             }}
