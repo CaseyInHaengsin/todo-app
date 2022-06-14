@@ -9,7 +9,7 @@ export default function LoginPage () {
   const { user, loadingUser, error } = React.useContext(UserContext)
   let navigate = useNavigate()
 
-  if (loadingUser === false && user?.id) {
+  if (!loadingUser && user.id) {
     return <Navigate to='/' />
   }
   return (

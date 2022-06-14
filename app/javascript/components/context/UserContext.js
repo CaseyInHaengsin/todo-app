@@ -28,8 +28,9 @@ export function UserProvider ({ children }) {
           setError(err?.response?.message)
           setLoadingUser(false)
         })
+    } else {
+      setLoadingUser(false)
     }
-    setLoadingUser(false)
   }, [])
 
   const userLogin = async (loginId, password, path) => {
