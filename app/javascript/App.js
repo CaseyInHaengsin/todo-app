@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import SignUpPage from './pages/SignUpPage'
 
 const App = () => {
+  const { user, loadingUser } = React.useContext(UserContext)
   return (
     <TodoProvider>
       <Router>

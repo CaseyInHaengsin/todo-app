@@ -16,7 +16,6 @@ export default function Home () {
   if (loadingUser === false && !user?.id) {
     return <Navigate to='/login' />
   }
-
   return (
     <TodoProvider>
       {loadingUser ? (
